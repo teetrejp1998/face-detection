@@ -8,6 +8,7 @@ def face_capture(source):
     cam = cv2.VideoCapture(0)
     # read image data from input stream
     image = cv2.imread(source)
+
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     return image, gray
 
@@ -43,8 +44,7 @@ def face_detect(gray, cascasdepath="haarcascade_frontalface_default.xml"):
 def render(image, faces, nogui=False):
     # create output image
     for (x, y, w, h) in faces:
-        cv2.rectangle(image, (x, y), (x + h, y + h), (0, 255, 0), 2)
-
+        cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 2)
     if nogui:
         cv2.imwrite('detected_face.png', image)
         return len(faces)
@@ -63,9 +63,9 @@ if __name__ == "__main__":
                         help="Source. Path to the input image.")
 
     parser.add_argument("-m", "--model",
-                       type=str,
-                       default="haarcascade_frontalface_default.xml",
-                       help="Model path. Path to the 'haarcascade_frontalface_default.xml'.")
+                        type=str,
+                        default="haarcascade_frontalface_default.xml",
+                        help="Model path. Path to the 'haarcascade_frontalface_default.xml'.")
 
     parser.add_argument("-u", "--nogui",
                         type=bool,
