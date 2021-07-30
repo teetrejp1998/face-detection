@@ -4,7 +4,7 @@ from models.admin import Admin
 from models.attendance import Attendance
 from starlette.status import HTTP_201_CREATED
 from starlette.responses import Response
-from utils.db_function import (db_insertAdmin,db_checkAdmin,db_getAttendanceTime)
+from utils.db_function import (db_insertAdmin,db_checkAdmin,db_getAttendanceTime,db_insertAttendance)
 import re
 
 appV1 = APIRouter()
@@ -43,5 +43,5 @@ async def getAttendanceWithTimestamp(Date:str):
 async def uploadUserPhoto(response:Response,profilePhoto: bytes=File(...),):
     response.headers['x-file-size'] = str(len(profilePhoto))
     response.set_cookie(key="cookie-api",value="test")
-    
+    db_insertAttendance(profilePhoto)
     return {"fileSize":len(profilePhoto)}
