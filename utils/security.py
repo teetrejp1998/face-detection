@@ -6,7 +6,9 @@ import jwt
 from fastapi import Depends,HTTPException
 from fastapi.security import OAuth2PasswordBearer
 import time
-from utils.db_function import db_checkTokenUser,db_checkJWTUsername
+from utils.pure_db_function import (
+    db_checkTokenUser,
+    db_checkJWTUsername)
 from starlette.status import HTTP_401_UNAUTHORIZED
 
 pwd_context = CryptContext(schemes=['bcrypt'])

@@ -2,10 +2,11 @@
 import sys
 import cv2
 import argparse
+from utils.const import IMAGE_PATH
 
 
 def face_capture(source):
-    cam = cv2.VideoCapture(0)
+    cam = cv2.VideoCapture(source)
     # read image data from input stream
     image = cv2.imread(source)
 
@@ -15,7 +16,6 @@ def face_capture(source):
 
 def webcam_capture(source):
     cam = cv2.VideoCapture(source)
-
     ret, frame = cam.read()
     if not ret:
         print("failed to grab frame")
@@ -46,7 +46,7 @@ def render(image, faces, nogui=False):
     for (x, y, w, h) in faces:
         cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 2)
     if nogui:
-        cv2.imwrite('detected_face.png', image)
+        cv2.imwrite(IMAGE_PATH, image)
         return len(faces)
     else:
         cv2.imshow("Faces found", image)

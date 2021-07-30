@@ -1,5 +1,6 @@
 from utils.db_object import db
 from utils.const import TESTING, TEST_DB_URL
+
 async def execute(query,is_many, values=None):
     if TESTING:
         await db.connect()
@@ -33,3 +34,7 @@ async def fetch(query,is_one,values=None):
         await db.disconnect()
     return out
 
+
+# from datetime import datetime
+# query = """select * from attendances where date=:date"""
+# values={"date":datetime.now()}
