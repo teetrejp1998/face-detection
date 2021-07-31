@@ -1,8 +1,8 @@
 services:
   backend:
-    build: ./
-    restart: always
-    volumes:
-      - root/images:app/images
-    ports:
-      - 8000:8000
+  build: ./
+  restart: always
+  volumes:
+    - /root/images:/app/images
+  ports:
+    - 8000:8000
