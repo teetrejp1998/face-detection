@@ -5,6 +5,7 @@ async def db_checkTokenUser(admin):
     query = """select * from admins where username = :username"""
     values = {"username":admin.username}
     result = await fetch(query, False, values)
+    
     if result is None:
         return None
     else:
@@ -31,13 +32,13 @@ async def db_insertAttendance(imageB):
     query = """insert into attendances(image, date )
     values(:image, :date)"""
     values = {"image":imageB,"date":datetime.now()}
-    # print(values)
     result = await execute(query=query, is_many=False, values=values )
     print(result)
-async def db_getAttendanceTime(timestamp):
-    query = """select * from attendances where date=:date"""
-    values={"date":timestamp}
-    all_timestamp = await fetch(query=query,is_one=True, values=values)
+
+async def db_getAttendanceTime():
+    query = """select * from attendances"""
+    all_timestamp = await fetch(query=query,is_one=False, values=None)
+    # print(all_timestamp)
     return all_timestamp
 
 async def db_checkAdmin(username):

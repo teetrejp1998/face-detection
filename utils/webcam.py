@@ -10,5 +10,13 @@ async def saveFaceMarking(source):
     # print(k)
     faces = face_detect(gray)
     render(image=frame,faces=faces,nogui=True)
+async def saveFaceMarkingFromRTSP(rtsp):
+    cam = cv2.VideoCapture(rtsp)
+    frame, gray = webcam_capture(source=rtsp)
+    # cv2.imshow('Video', frame)
+    # k = cv2.waitKey(0)
+    # print(k)
+    faces = face_detect(gray)
+    render(image=frame,faces=faces,nogui=True)
 
 
